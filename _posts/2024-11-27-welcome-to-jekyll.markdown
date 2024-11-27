@@ -208,7 +208,7 @@ Going deep into code ,Checking  ProofOfWork method we have copied the transactio
 	return b
 }
  ```
-***The transtions in transaction pools are emptied as everything is verified***
+***The transactions in the transaction pools are emptied as everything is verified***
 
 ### Conclusion
 
