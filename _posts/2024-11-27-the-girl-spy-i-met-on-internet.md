@@ -9,4 +9,4 @@ permalink: /machine-learning/:year/:month/:day/:slug/
 
 ## Haha Motive
 
-Started another day just to ploish my Machine Learning skills worked back three years ago , and i just went through the beginners course on machine learning from freecode camp.org ,  its said that Every  master was always a begginer ,haha for me my short memory makes it opposite and starting again from the begining 
+Started another day just to polish my Machine Learning skills worked back three years ago , and i just went through the beginners course on machine learning from freecode camp.org ,  its said that Every  master was always a begginer ,haha for me my short memory makes it opposite and starting again from the begining 
