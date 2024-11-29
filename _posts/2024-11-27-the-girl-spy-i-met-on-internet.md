@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "The Girl I Met on the Internet"
+title:  "Repolishing My Machine Learning Skills: A Journey Back to Mastery"
 date:   2024-11-27 09:00:00 +0000
-categories: personal story
-slug: the-girl-spy
-permalink: /personal-story/:year/:month/:day/:slug/
+categories: machine learning
+slug: machine-learning
+permalink: /machine-learning/:year/:month/:day/:slug/
 ---
