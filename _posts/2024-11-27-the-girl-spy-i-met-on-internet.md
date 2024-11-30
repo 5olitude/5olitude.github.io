@@ -273,9 +273,15 @@ The K-Nearest Neighbors (KNN) algorithm is a simple yet powerful supervised lear
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import classification_report
 knn_model = KNeighborsClassifier(n_neighbors=5)
+#n_neighbors=5:
+#Specifies that the model will consider the 5 nearest neighbors to classify each data point.
 knn_model.fit(X_train, y_train)
+#fit:This method trains the model using the training data (X_train) and their corresponding labels (y_train)
 y_pred = knn_model.predict(X_test)
+#y_predict:Predicts the labels for the test dataset (X_test) using the trained KNN model.
+
 print(classification_report(y_test, y_pred))
+#Compares the actual labels (y_test) with the predicted labels (y_pred) and calculates key metrics:
 ```
 For each class (e.g., 0 and 1), you have three primary metrics:
 
