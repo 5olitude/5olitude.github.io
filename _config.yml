@@ -33,6 +33,9 @@ url: "https://5olitude.github.io/" # the base hostname & protocol for your site,
 theme: minima
 plugins:
   - jekyll-feed
+markdown: kramdown
+kramdown:
+  input: GFM
 
 # Exclude from processing.
 # The following items will not be processed, by default.

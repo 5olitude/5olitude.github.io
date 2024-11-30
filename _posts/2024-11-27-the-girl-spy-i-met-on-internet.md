@@ -1,11 +1,27 @@
 ---
 layout: post
+mathjax: true
 title:  "Repolishing My Machine Learning Skills: A Journey Back to Mastery"
 date:   2024-11-27 09:00:00 +0000
 categories: machine learning
 slug: machine-learning
 permalink: /machine-learning/:year/:month/:day/:slug/
 ---
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      renderMathInElement(document.body, {
+        delimiters: [
+          {left: "$$", right: "$$", display: true},
+          {left: "$", right: "$", display: false}
+        ]
+      });
+    });
+  </script>
+</head>
 
 ## Haha Motive
 
@@ -241,7 +257,7 @@ test, X_test, y_test = scale_dataset(test, oversample=False)
 ```
 
 ### Models for Machine Learning
-#### KNN Model (k neatest Neighbours)  
+### KNN Model (k neatest Neighbours)  
 The K-Nearest Neighbors (KNN) algorithm is a simple yet powerful supervised learning method used for both classification and regression tasks. Its core idea is to make predictions based on the similarity of data points in the feature space.  
 
 #### How KNN Works:
@@ -288,3 +304,89 @@ For each class (e.g., 0 and 1), you have three primary metrics:
 **Precision:**Measures how many of the predicted positive labels were actually correct.  
 **Recall (Sensitivity/True Positive Rate):** Measures how many of the actual positive labels the model correctly identified.  
 **F1-Score:**The harmonic mean of precision and recall.It balances the trade-off between the two, especially useful when the dataset is imbalanced.
+
+### Naive Bayes Model 
+The Naive Bayes model is a family of probabilistic machine learning algorithms based on Bayes’ Theorem, with the assumption of conditional independence between features. It is widely used for classification tasks due to its simplicity, efficiency, and effectiveness, especially in text-based applications like spam filtering and sentiment analysis.
+
+#### Example
+
+   |             | Test Positive | Test Negative | Total |
+|-------------|---------------|---------------|-------|
+| COVID Yes   | 80            | 10            | 90    |
+| COVID No    | 20            | 190           | 210   |
+| **Total**   | 100           | 200           | 300   |
+
+| **Metric**           | **Value** |
+|-----------------------|-----------|
+| **True Positives (TP)**  | 80        |
+| **False Positives (FP)** | 20        |
+| **True Negatives (TN)**  | 190       |
+| **False Negatives (FN)** | 10        |
+
+
+#### Finding True Positive rate 
+The True Positive Rate (TPR) is the proportion of actual positive cases that are correctly identified as positive by the classifier. In other words, it measures how well the classifier detects positive instances.
+
+**$TPR = \frac{TP}{TP + FN}$** which is  80/80+10 = .8 (80%)
+
+**The general form of Bayes’ Rule is:**
+**$P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)}$**  
+
+Where:  
+**P(A|B)** is the posterior probability: The probability of event A occurring given that event B has occurred (what we’re trying to calculate).  
+**P(B|A)** is the likelihood: The probability of observing event B given that A has occurred.  
+**P(A) is the prior probability:** The probability of event A before observing any evidence (our initial belief).  
+**P(B) is the evidence:** The total probability of observing B.
+
+**Applying bias rule in our problem**:  
+$P(\text{Has COVID}|\text{Test Positive}) = \frac{P(\text{Test Positive}|\text{Has COVID}) \cdot P(\text{Has COVID})}{P(\text{Test Positive})}$
+
+# Understanding Bayes' Theorem for COVID Testing
+
+1. **Likelihood:**
+   $\( P(\text{Test Positive} | \text{Has COVID}) \)$
+
+   This is the True Positive Rate (TPR), which is the probability of testing positive given that you actually have COVID. From the confusion matrix:  
+   #### $P(\text{Test Positive} | \text{Has COVID}) = \frac{TP}{TP + FN} = \frac{80}{80 + 10} = \frac{80}{90} = 0.8889$
+
+2. **Prior: $\( P(\text{Has COVID}) \)$**
+
+   This is the prior probability of a person having COVID, which we need to estimate. Let’s assume from the population:
+   - 10% of people have COVID, so $\( P(\text{Has COVID}) = 0.1 \)$.
+   - 90% of people do not have COVID, so $\( P(\text{No COVID}) = 0.9 \)$.
+
+3. **Evidence: $\( P(\text{Test Positive}) \)$**
+
+   This is the total probability of testing positive, which we calculate using both the true positives and false positives:  
+   ###### $P(\text{Test Positive}) = P(\text{Test Positive} | \text{Has COVID}) \cdot P(\text{Has COVID}) + P(\text{Test Positive} | \text{No COVID}) \cdot P(\text{No COVID})$
+   
+
+   From the confusion matrix:  
+   $\( P(\text{Test Positive} | \text{No COVID}) = \frac{FP}{FP + TN} = \frac{10}{10 + 90} = \frac{10}{100} = 0.1 \)$
+
+   So,
+   $P(\text{Test Positive}) = (0.8 \cdot 0.1) + (0.1 \cdot 0.9) = 0.08 + 0.09 = 0.17$
+
+4. Posterior (P(Has COVID | Test Positive))  
+Finally, we apply Bayes’ Theorem to calculate the posterior probability of having COVID, given that the person tested positive. This is what we’re ultimately interested in:  
+$P(\text{Has COVID} | \text{Test Positive}) = \frac{P(\text{Test Positive} | \text{Has COVID}) \cdot P(\text{Has COVID})}{P(\text{Test Positive})}$
+
+
+Substitute the values:  
+$P(\text{Has COVID} | \text{Test Positive}) = \frac{0.8889 \cdot 0.1}{0.17889} = \frac{0.08889}{0.17889} \approx 0.497$
+So, the posterior probability that a person has COVID given that they tested positive is approximately 0.497 or 49.7%.
+
+A product over multiple classes or distributions in the context of MAP. If there are multiple components or features in your data  x , you might use conditional independence assumptions to simplify the likelihood function. For example:  
+#### **$P(x | C_k) = \prod_{i=1}^{n} P(x_i | C_k)$**
+
+#### TIME TO CODE ON NAIVE BAYES MODEL
+
+```python
+from sklearn.naive_bayes import GaussianNB
+nb_model = GaussianNB()
+nb_model = nb_model.fit(X_train, y_train)
+y_pred = nb_model.predict(X_test)
+print(classification_report(y_test, y_pred))
+
+
+```
